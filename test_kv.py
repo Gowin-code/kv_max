@@ -38,12 +38,26 @@ def test_store_context():
 
 
 def test_persistence():
+    import os
+
     kv = KV(base_path="test_data")
 
     kv.set("persist", "value")
+
+    print("BEFORE FLUSH:", kv.get("persist"))
+
     kv.flush_all()
 
+    print("AFTER FLUSH:", kv.get("persist"))
+
+    if os.path.exists("test_data"):
+        print("FILES:", os.listdir("test_data"))
+    else:
+        print("test_data DOES NOT EXIST")
+
     kv2 = KV(base_path="test_data")
+
+    print("LOADED VALUE:", kv2.get("persist"))
 
     assert kv2.get("persist") == "value"
 
