@@ -43,17 +43,13 @@ def test_persistence():
     kv = KV(base_path="test_data")
 
     kv.set("persist", "value")
-
-    print("BEFORE FLUSH:", kv.get("persist"))
-
     kv.flush_all()
 
-    print("AFTER FLUSH:", kv.get("persist"))
+    print("FILES:", os.listdir("test_data"))
 
-    if os.path.exists("test_data"):
-        print("FILES:", os.listdir("test_data"))
-    else:
-        print("test_data DOES NOT EXIST")
+    with open("test_data/global.json", "r") as f:
+        print("GLOBAL.JSON CONTENT:")
+        print(f.read())
 
     kv2 = KV(base_path="test_data")
 
