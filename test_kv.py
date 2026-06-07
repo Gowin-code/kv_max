@@ -53,6 +53,8 @@ def test_persistence():
 
     kv2 = KV(base_path="test_data")
 
+    print("KV2 DICT:", vars(kv2))
+
     print("LOADED VALUE:", kv2.get("persist"))
 
     assert kv2.get("persist") == "value"
