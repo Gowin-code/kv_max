@@ -38,24 +38,12 @@ def test_store_context():
 
 
 def test_persistence():
-    import os
-
     kv = KV(base_path="test_data")
 
     kv.set("persist", "value")
     kv.flush_all()
 
-    print("FILES:", os.listdir("test_data"))
-
-    with open("test_data/global.json", "r") as f:
-        print("GLOBAL.JSON CONTENT:")
-        print(f.read())
-
     kv2 = KV(base_path="test_data")
-
-    print("KV2 DICT:", vars(kv2))
-
-    print("LOADED VALUE:", kv2.get("persist"))
 
     assert kv2.get("persist") == "value"
 
