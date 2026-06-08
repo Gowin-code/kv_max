@@ -138,8 +138,10 @@ def test_shopping_list_persistence():
 def test_shopping_list_quantity_merge():
     kv = KV(base_path="test_data")
 
+    phone = "merge_test_user"
+
     kv.add_to_shopping_list(
-        "123",
+        phone,
         {
             "item_name": "Rice",
             "sku_fingerprint": "rice1",
@@ -148,7 +150,7 @@ def test_shopping_list_quantity_merge():
     )
 
     kv.add_to_shopping_list(
-        "123",
+        phone,
         {
             "item_name": "Rice",
             "sku_fingerprint": "rice1",
@@ -156,7 +158,7 @@ def test_shopping_list_quantity_merge():
         }
     )
 
-    items = kv.get_shopping_list("123")
+    items = kv.get_shopping_list(phone)
 
     assert items[0]["quantity"] == 5
 
