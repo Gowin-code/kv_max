@@ -360,6 +360,7 @@ class KV:
         self._replay_wal()
 
         self._initialize_empty_store("global")
+        self._loaded_stores.discard("global")
 
         self.MAX_TTL_SECONDS = max(
             self.CSW_TTL_SECONDS,
